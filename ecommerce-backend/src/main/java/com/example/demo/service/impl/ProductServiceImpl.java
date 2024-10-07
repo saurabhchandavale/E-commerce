@@ -96,10 +96,20 @@ public class ProductServiceImpl implements ProductService{
 	@Override
 	public Product updateProduct(Long ProductId, Product request) throws ProductException {
 		Product product = findProductById(ProductId);
-		
+		System.out.println("SCE32 Update product");
 		if(request.getQuantity() != 0) {
 			product.setQuantity(request.getQuantity());
 		}
+		product.setTitle(request.getTitle());
+	    product.setDescription(request.getDescription());
+	    product.setPrice(request.getPrice());
+	    product.setDiscountedPrice(request.getDiscountedPrice());
+	    product.setDiscountPersent(request.getDiscountPersent());
+	    product.setQuantity(request.getQuantity());
+	    product.setBrand(request.getBrand());
+	    product.setColor(request.getColor());
+	    product.setSizes(request.getSizes()); 
+	    product.setImageUrl(request.getImageUrl());
 		
 		return productRepository.save(product);
 	}
