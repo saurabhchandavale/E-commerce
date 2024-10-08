@@ -20,6 +20,7 @@ import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.request.LoginRequest;
 import com.example.demo.response.AuthResponse;
+import com.example.demo.service.CartService;
 import com.example.demo.service.impl.CustomeUserDetailServiceImpl;
 
 @RestController
@@ -33,6 +34,8 @@ public class AuthController {
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private CustomeUserDetailServiceImpl customeUserDetailService;
+	@Autowired
+	private CartService cartService;
 	//http://localhost:8001/auth/signup
 	@PostMapping("/signup")
 	public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws UserException{
@@ -56,8 +59,11 @@ public class AuthController {
 		createdUser.setPassword(password);
 		createdUser.setFirstName(firstName);
 		createdUser.setLastName(lastName);
-		
+				
 		User savedUser = userRepository.save(createdUser);
+		
+		//cart is created for user when he/she signups
+		cartService.createCart(savedUser);
 		
 		Authentication authentication = new UsernamePasswordAuthenticationToken(savedUser.getEmail(),savedUser.getPassword());
 		SecurityContextHolder.getContext().setAuthentication(authentication);

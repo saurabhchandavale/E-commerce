@@ -8,7 +8,7 @@ import com.example.demo.model.Cart;
 
 public interface CartRepository extends JpaRepository<Cart, Long> {
 	
-	@Query("SELECT c from Cart c WHERE c.user.id = : userId")
+	@Query("SELECT c from Cart c WHERE c.user.id = :userId")
 	public Cart findCartByUserId(@Param("userId") Long userId);
 
 }

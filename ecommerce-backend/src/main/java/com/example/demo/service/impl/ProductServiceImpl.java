@@ -110,7 +110,7 @@ public class ProductServiceImpl implements ProductService{
 	    product.setColor(request.getColor());
 	    product.setSizes(request.getSizes()); 
 	    product.setImageUrl(request.getImageUrl());
-		
+		System.out.println("SCE32 ---------- " + request.getSizes());
 		return productRepository.save(product);
 	}
 

@@ -40,6 +40,7 @@ public class CartItemServiceImpl implements CartItemService {
 		CartItem item = findCartItemById(id);
 		User user = userService.findUserById(item.getUserId());
 		if (user.getId().equals(userId)) {
+			System.out.println("SCE32 ------" + cartItem.getQuantity());
 			item.setQuantity(cartItem.getQuantity());
 			item.setPrice(item.getProduct().getPrice() * item.getQuantity());
 			item.setDiscountedPrice(item.getProduct().getDiscountedPrice() * item.getQuantity());
